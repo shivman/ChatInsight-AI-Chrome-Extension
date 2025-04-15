@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatInsight AI</title>
+  <style>
+    body {
+      width: 400px;
+      padding: 16px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header img {
+      width: 32px;
+      height: 32px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #1a73e8;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #1557b0;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .insights {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      padding: 12px;
+    }
+    .insight-item {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .insight-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .status {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .settings {
+      padding: 12px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+    }
+    .error {
+      color: #d93025;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="assets/icon48.png" alt="ChatInsight AI Logo">
+      <h1>ChatInsight AI</h1>
+    </div>
+    
+    <div class="settings">
+      <div class="input-group">
+        <label for="apiKey">Gemini API Key:</label>
+        <input type="password" id="apiKey" placeholder="Enter your Gemini API key">
+        <button id="saveApiKey">Save API Key</button>
+        <div id="apiKeyStatus" class="status"></div>
+      </div>
+    </div>
+
+    <div class="status" id="connectionStatus">
+      Waiting for chat connection...
+    </div>
+
+    <div class="input-group">
+      <label for="prompt">Ask about your chats:</label>
+      <textarea id="prompt" placeholder="e.g., 'Summarize the main topics discussed in the last hour'"></textarea>
+      <button id="analyzeBtn">Generate Insight</button>
+    </div>
+
+    <div class="insights" id="insightsContainer">
+      <!-- Insights will be dynamically added here -->
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

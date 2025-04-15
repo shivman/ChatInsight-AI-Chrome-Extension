@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gemini API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1557b0;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gemini API Test</h1>
+    <button onclick="testAPI()">Run Test</button>
+    <div id="output"></div>
+
+    <script>
+        // Test configuration
+        const API_KEY = 'AIzaSyABDclvruKv9LD35fv52SD-RC6wG61Of8Y';
+        const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+
+        function log(message, isError = false) {
+            const output = document.getElementById('output');
+            const pre = document.createElement('pre');
+            pre.style.color = isError ? 'red' : 'black';
+            pre.textContent = typeof message === 'string' ? message : JSON.stringify(message, null, 2);
+            output.appendChild(pre);
+        }
+
+        async function testAPI() {
+            document.getElementById('output').innerHTML = '';
+            log('Testing Gemini API...');
+
+            try {
+                const response = await fetch(`${API_ENDPOINT}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: "What is artificial intelligence?"
+                            }]
+                        }]
+                    })
+                });
+
+                log('Response status: ' + response.status);
+                const responseText = await response.text();
+                log('Raw response:');
+                log(responseText);
+
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${responseText}`);
+                }
+
+                const result = JSON.parse(responseText);
+                log('Parsed response:');
+                log(result);
+
+                if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
+                    log('Success! API Response:');
+                    log(result.candidates[0].content.parts[0].text);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                log('Test failed: ' + error.message, true);
+            }
+        }
+    </script>
+</body>
+</html> 

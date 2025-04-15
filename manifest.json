@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "ChatInsight AI",
+  "version": "1.0.0",
+  "description": "Real-time chat analysis for Telegram and WhatsApp using Gemini 2.0 Flash LLM",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://web.telegram.org/*",
+    "https://web.whatsapp.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.telegram.org/*"],
+      "js": ["content-scripts/telegram-observer.js"]
+    },
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content-scripts/whatsapp-observer.js"]
+    }
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+} 
