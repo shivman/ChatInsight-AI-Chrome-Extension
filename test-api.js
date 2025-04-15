@@ -1,5 +1,5 @@
 // Test configuration
-const API_KEY = 'AIzaSyABDclvruKv9LD35fv52SD-RC6wG61Of8Y';
+const API_KEY = 'Enter your key';
 const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 // Simple test function
