@@ -40,10 +40,6 @@ Here are some example prompts you can try:
 - "Analyze the sentiment of the conversation"
 - "Extract important dates and deadlines mentioned"
 
-- "AIzaSyAPPP7dg9qUUcBZt8B4oMpPuS4T4vTgTSc"
-- "Analyze the sentiment of todays conversation"
-
-
 ## Technical Details
 
 - Built with Manifest V3
